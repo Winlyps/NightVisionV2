@@ -57,7 +57,11 @@ class ConfigManager(private val plugin: NightVision) {
 
         thread(isDaemon = true) {
             while (true) {
-                val key = watcher?.take() ?: break
+                val key = try {
+                    watcher?.take() ?: break
+                } catch (e: ClosedWatchServiceException) {
+                    break // Exit loop if the service is closed
+                }
                 for (event in key.pollEvents()) {
                     val kind = event.kind()
                     if (kind == StandardWatchEventKinds.OVERFLOW) continue
@@ -110,8 +114,8 @@ class ConfigManager(private val plugin: NightVision) {
                 
                 messages:
                   prefix: "&8[&bNightVision&8] &r"
-                  night-vision-enabled: "&aNight Vision has been enabled."
-                  night-vision-disabled: "&cNight Vision has been disabled."
+                  night-vision-enabled: "&aGamma has been enabled."
+                  night-vision-disabled: "&cGamma has been disabled."
                   no-permission: "&cYou do not have permission to use this command."
                   player-only: "&cThis command can only be run by a player."
                 """.trimIndent()
