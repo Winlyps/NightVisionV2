@@ -12,14 +12,19 @@ repositories {
     maven("https://repo.papermc.io/repository/maven-public/") {
         name = "papermc-repo"
     }
+    maven("https://oss.sonatype.org/content/groups/public/")
 }
 
 dependencies {
     compileOnly("io.papermc.paper:paper-api:1.20.6-R0.1-SNAPSHOT")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+    implementation("org.xerial:sqlite-jdbc:3.46.0.0")
 }
 
 tasks {
+    shadowJar {
+        relocate("org.sqlite", "winlyps.nightvision.lib.sqlite")
+    }
     runServer {
         // Configure the Minecraft version for our task.
         // This is the only required configuration besides applying the plugin.
