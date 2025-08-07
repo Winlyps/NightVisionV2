@@ -98,7 +98,7 @@ class ConfigManager(private val plugin: NightVision) {
 
                 # Potion effect settings
                 effects:
-                  # If true, shows potion particles around the player.
+                  # If true, shows Night Vision particles around the player.
                   show-particles: false
                   # If true, shows the Night Vision icon in the player's HUD.
                   show-icon: false
@@ -110,7 +110,6 @@ class ConfigManager(private val plugin: NightVision) {
                 
                 messages:
                   prefix: "&8[&bNightVision&8] &r"
-                  reloaded: "&aConfiguration reloaded successfully."
                   night-vision-enabled: "&aNight Vision has been enabled."
                   night-vision-disabled: "&cNight Vision has been disabled."
                   no-permission: "&cYou do not have permission to use this command."
